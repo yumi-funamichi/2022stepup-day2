@@ -1,0 +1,199 @@
+@use "reset";
+
+//よく使う値を変数化
+
+$primary: rgba(21, 213, 213, 0.676);
+$secondary:rgb(71, 146, 119);
+$dark:rgb(68, 66, 66);
+$light:rgb(214, 214, 214);
+$gray:rgb(90, 86, 86);
+
+//よく使う処理を関数化
+@mixin portfolioImage($path){
+    background: url($path)no-repeat center center;
+            background-size: cover;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: relative;
+            &::after{
+                @include overray;
+            }
+}
+
+@mixin overray{
+    content:"";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top,rgba($gray,0.8) 0% , rgba($primary,0.3)100%);
+}
+
+
+
+body{
+    color:$light;
+    background-color:$dark;
+    margin: 100px auto 0;
+}
+
+section{
+    min-width: 1280px;
+    margin: 100px auto;
+}
+
+.headline{
+    margin-bottom: 50px;
+    position: relative;
+    padding: 1rem 0.5rem;  
+    display: inline-block;
+    &::after{      //疑似要素 HTML上に存在しない要素を追加できる
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(to right,$primary 0%, $secondary 100%);
+    }
+}
+
+header{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    height: 70px;
+    background-color: $primary;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    ul{
+        display: flex;
+        justify-content: space-around;
+    }
+
+    nav{
+        width: 50%;
+    }
+
+}
+
+#mainVisual{
+    padding: 70px 30px 0;
+    margin: 0 auto;
+    video{
+        width: 100%;
+    }
+}
+
+#about{
+    .about_box{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        img{
+            width: 50%;
+            padding-right: 30px;
+        }    
+        .about_content{
+            h3{
+                font-size: 24px;
+                margin-bottom: 24px;
+            }
+            p{
+                padding: 0 50px;
+                text-align: justify;
+            }
+        }
+    }
+
+}
+
+#portfolio{
+    padding: 30px;
+    .portfolio_box{
+        width: 100%;
+        height: 680px;
+        display: flex;
+        justify-content: center;
+
+        .portrait{
+            @include portfolioImage("../img/photo2.jpg");
+        }
+
+        .musicVideo{
+            @include portfolioImage("../img/photo3.jpg");
+        }
+
+        .landscape{
+            @include portfolioImage("../img/photo4.jpg");
+
+        }
+    }
+}
+
+
+
+#news{
+    background-color: $light;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    .headline{
+        color: $dark;
+    }
+    .news_box{
+        width: 80%;
+        margin: 0 auto 100px;
+        padding: 0 30px;
+        display: flex;
+        justify-content: space-around;
+        .news_content{
+            width: 300px;
+                img{
+                    display: block;
+                    object-fit: cover;
+                    height: 200px;
+                    width: 300px;
+                }
+                p{
+                    color: $gray;
+                    font-size: 12px;
+                    margin-top: 24px;
+                    margin-bottom: 12px;
+                }
+
+                h3{
+                    color: $dark;
+                    font-weight: 400;
+                    font-size: 16px;
+                    word-wrap: break-word;
+                    text-align: justify;
+                }
+            
+        }
+    }
+
+
+}
+
+
+.footer {
+    border-top: 1px solid #555555;
+    height: 100px;
+    line-height: 100px;
+    margin-top: 360px;
+
+    p {
+        color: #555555;
+        text-align: center;
+    }
+}
+
+
+
+
